@@ -1,15 +1,14 @@
 import React from 'react';
-import {View, Text, Dimensions, StyleSheet} from 'react-native';
+import {View, Text, Dimensions, StyleSheet, Image} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-export const SLIDE_HEIGHT = height * 0.61;
+export const SLIDE_HEIGHT = height * 0.57;
 
 const styles = StyleSheet.create({
   container: {
     width,
   },
   titleContainer: {
-    // backgroundColor: 'red',
     height: 100,
     justifyContent: 'center',
   },
@@ -20,8 +19,17 @@ const styles = StyleSheet.create({
     fontFamily: 'SF-Pro-Text-Bold',
     textAlign: 'center',
   },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  picture: {
+    ...StyleSheet.absoluteFillObject,
+    height: undefined,
+    width: undefined,
+    resizeMode: 'contain',
+  },
 });
-const Slide = ({title, right}) => {
+const Slide = ({title, right, picture}) => {
   const transform = [
     {
       translateY: (SLIDE_HEIGHT - 100) / 2,
@@ -36,6 +44,9 @@ const Slide = ({title, right}) => {
   return (
     <>
       <View style={styles.container}>
+        <View style={styles.underlay}>
+          <Image source={picture} style={styles.picture} />
+        </View>
         <View style={[styles.titleContainer, {transform}]}>
           <Text style={styles.title}>{title}</Text>
         </View>
