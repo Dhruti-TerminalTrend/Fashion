@@ -2,6 +2,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Welcome, Onboarding} from './src/Authentication';
+import {ThemeProvider} from '@shopify/restyle';
+import {Theme} from './src/Components';
 
 const AuthenticationStack = createStackNavigator();
 
@@ -24,9 +26,11 @@ const AuthenticationNavigator = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <AuthenticationNavigator />
-    </NavigationContainer>
+    <ThemeProvider theme={Theme}>
+      <NavigationContainer>
+        <AuthenticationNavigator />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 
