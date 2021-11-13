@@ -1,5 +1,5 @@
 import React from 'react';
-import {createText, createTheme} from '@shopify/restyle';
+import {createBox, createText, createTheme} from '@shopify/restyle';
 
 const Theme = createTheme({
   colors: {
@@ -8,6 +8,7 @@ const Theme = createTheme({
     text: 'rgba(12,13, 52, 0.7)',
     grey: 'rgba(12,13, 52, 0.05)',
     white: 'white',
+    slideGrey: '#F4F0EF',
   },
   spacing: {
     s: 8,
@@ -15,34 +16,40 @@ const Theme = createTheme({
     l: 24,
     xl: 40,
   },
+  borderRadii: {
+    s: 4,
+    m: 10,
+    l: 25,
+    xl: 75,
+  },
   textVariants: {
     hero: {
       fontSize: 70,
       lineHeight: 90,
       color: 'white',
-      fontFamily: 'SF-Pro-Text-Bold',
+      fontFamily: 'SF-Pro-Display-Bold',
       textAlign: 'center',
     },
     titleBig: {
       fontSize: 28,
-      fontFamily: 'SF-Pro-Text-Semibold',
+      fontFamily: 'SF-Pro-Display-Semibold',
       color: 'title',
     },
     titleSmall: {
       fontSize: 23,
       lineHeight: 30,
-      fontFamily: 'SF-Pro-Text-Semibold',
+      fontFamily: 'SF-Pro-Display-Semibold',
       color: 'title',
     },
     body: {
       fontSize: 14,
       lineHeight: 18,
-      fontFamily: 'SF-Pro-Text-Regular',
+      fontFamily: 'SF-Pro-Display-Regular',
       color: 'text',
     },
     button: {
       fontSize: 15,
-      fontFamily: 'SF-Pro-Text-Semibold',
+      fontFamily: 'SF-Pro-Display-Regular',
       textAlign: 'center',
     },
   },
@@ -50,5 +57,6 @@ const Theme = createTheme({
 });
 
 export const Text = createText();
+export const Box = createBox();
 
 export default Theme;

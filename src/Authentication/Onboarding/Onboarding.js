@@ -1,16 +1,22 @@
 import React, {useRef} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
-import Animated, {divide, multiply} from 'react-native-reanimated';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import Animated, {
+  divide,
+  interpolate,
+  multiply,
+  Extrapolate,
+} from 'react-native-reanimated';
 import {
   interpolateColor,
   useScrollHandler,
 } from 'react-native-redash/lib/module/v1';
+import {Welcome} from '..';
+import {Theme} from '../../Components';
 import Dot from './Dot';
 import Slide, {SLIDE_HEIGHT} from './Slide';
 import SubSlide from './SubSlide';
 
 const {width} = Dimensions.get('window');
-const BORDER_RADIUS = 75;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,7 +24,12 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: Theme.borderRadii.xl,
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    // alignItems: 'center',
+    // justifyContent: 'flex-start',
   },
   footer: {
     flex: 1,
@@ -26,7 +37,7 @@ const styles = StyleSheet.create({
   footerContent: {
     backgroundColor: 'white',
     flex: 1,
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: Theme.borderRadii.xl,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
@@ -35,9 +46,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  picture: {
+    ...StyleSheet.absoluteFillObject,
+    height: undefined,
+    width: undefined,
+    resizeMode: 'contain',
+  },
 });
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
+  console.log(navigation);
   const scroll = useRef(null);
 
   const {scrollHandler, x} = useScrollHandler();
@@ -46,10 +64,14 @@ const Onboarding = () => {
     {
       title: 'Relaxed',
       subTitle: 'Find Your Outfits',
-      description:
-        'Confused about your outfit? Don"t" worry! Find the best outfit here!',
+      description: `Confused about your outfit? Don't worry! Find the best outfit here!`,
       color: '#BFEAF5',
-      picture: require('./assets/1.png'),
+      // picture: require('./assets/1.png'),
+      picture: {
+        src: require('./assets/1.png'),
+        width: 2513,
+        height: 3583,
+      },
     },
     {
       title: 'Playful',
@@ -57,7 +79,12 @@ const Onboarding = () => {
       description:
         'Hating the clothes in your wardrobe? Explore hundreds of outfit ideas',
       color: '#BEECC4',
-      picture: require('./assets/2.png'),
+      // picture: require('./assets/2.png'),
+      picture: {
+        src: require('./assets/2.png'),
+        width: 2791,
+        height: 3744,
+      },
     },
     {
       title: 'Excentric',
@@ -65,7 +92,12 @@ const Onboarding = () => {
       description:
         'Create your individual and unique style and look amazing everyday',
       color: '#FFE4D9',
-      picture: require('./assets/3.png'),
+      // picture: require('./assets/3.png'),
+      picture: {
+        src: require('./assets/3.png'),
+        width: 2738,
+        height: 3244,
+      },
     },
     {
       title: 'Funky',
@@ -73,7 +105,12 @@ const Onboarding = () => {
       description:
         'Discover the latest trends in fashion and explore your personality',
       color: '#FFDDDD',
-      picture: require('./assets/4.png'),
+      // picture: require('./assets/4.png'),
+      picture: {
+        src: require('./assets/4.png'),
+        width: 1757,
+        height: 2551,
+      },
     },
   ];
 
@@ -86,6 +123,30 @@ const Onboarding = () => {
     <>
       <View style={styles.container}>
         <Animated.View style={[styles.slider, {backgroundColor}]}>
+          {slides.map(({picture}, index) => {
+            const opacity = interpolate(x, {
+              inputRange: [
+                (index - 0.5) * width,
+                index * width,
+                (index + 0.5) * width,
+              ],
+              outputRange: [0, 1, 0],
+              extrapolate: Extrapolate.CLAMP,
+            });
+            return (
+              <Animated.View style={[styles.underlay, {opacity}]}>
+                <Image
+                  source={picture.src}
+                  style={styles.picture}
+                  // style={{
+                  //   width: width - Theme.borderRadii.xl,
+                  //   height:
+                  //     ((width - Theme.borderRadii.xl) * picture.height) / picture.width,
+                  // }}
+                />
+              </Animated.View>
+            );
+          })}
           <Animated.ScrollView
             ref={scroll}
             horizontal
@@ -134,22 +195,27 @@ const Onboarding = () => {
                   ],
                 },
               ]}>
-              {slides.map((slide, index) => (
-                <SubSlide
-                  subTitle={slide.subTitle}
-                  description={slide.description}
-                  key={index}
-                  last={index === slides.length - 1}
-                  onPress={() => {
-                    if (scroll.current) {
-                      scroll.current.getNode().scrollTo({
-                        x: width * (index + 1),
-                        animated: true,
-                      });
-                    }
-                  }}
-                />
-              ))}
+              {slides.map((slide, index) => {
+                const last = index === slides.length - 1;
+                return (
+                  <SubSlide
+                    subTitle={slide.subTitle}
+                    description={slide.description}
+                    key={index}
+                    last={last}
+                    onPress={() => {
+                      if (last) {
+                        navigation.navigate(Welcome);
+                      } else {
+                        scroll?.current?.getNode().scrollTo({
+                          x: width * (index + 1),
+                          animated: true,
+                        });
+                      }
+                    }}
+                  />
+                );
+              })}
             </Animated.View>
           </View>
         </View>

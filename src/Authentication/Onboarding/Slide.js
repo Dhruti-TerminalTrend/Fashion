@@ -3,7 +3,9 @@ import {View, Dimensions, StyleSheet, Image} from 'react-native';
 import {Text} from '../../Components';
 
 const {width, height} = Dimensions.get('window');
+console.log(width, height);
 export const SLIDE_HEIGHT = height * 0.57;
+export const BORDER_RADIUS = 75;
 
 const styles = StyleSheet.create({
   container: {
@@ -11,24 +13,18 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     height: 100,
-    justifyContent: 'center',
   },
-  // title: {
-  //   fontSize: 70,
-  //   lineHeight: 90,
-  //   color: 'white',
-  //   fontFamily: 'SF-Pro-Text-Bold',
-  //   textAlign: 'center',
+  // underlay: {
+  //   ...StyleSheet.absoluteFillObject,
+  //   // alignItems: 'center',
+  //   // justifyContent: 'flex-start',
   // },
-  underlay: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  picture: {
-    ...StyleSheet.absoluteFillObject,
-    height: undefined,
-    width: undefined,
-    resizeMode: 'contain',
-  },
+  // picture: {
+  //   ...StyleSheet.absoluteFillObject,
+  //   height: undefined,
+  //   width: undefined,
+  //   resizeMode: 'contain',
+  // },
 });
 const Slide = ({title, right, picture}) => {
   const transform = [
@@ -45,9 +41,18 @@ const Slide = ({title, right, picture}) => {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.underlay}>
-          <Image source={picture} style={styles.picture} />
-        </View>
+        {/* <View style={styles.underlay}> */}
+        {/* <Image source={picture} style={styles.picture} /> */}
+        {/* <Image
+            source={picture.src}
+            style={styles.picture}
+            // style={{
+            //   width: width - BORDER_RADIUS,
+            //   height:
+            //     ((width - BORDER_RADIUS) * picture.height) / picture.width,
+            // }}
+          /> */}
+        {/* </View> */}
         <View style={[styles.titleContainer, {transform}]}>
           <Text variant="hero">{title}</Text>
         </View>
