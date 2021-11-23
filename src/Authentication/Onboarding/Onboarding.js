@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
 });
 
 const Onboarding = ({navigation}) => {
-  console.log(navigation);
   const scroll = useRef(null);
 
   const {scrollHandler, x} = useScrollHandler();
@@ -68,7 +67,7 @@ const Onboarding = ({navigation}) => {
       color: '#BFEAF5',
       // picture: require('./assets/1.png'),
       picture: {
-        src: require('./assets/1.png'),
+        src: require('../assets/1.png'),
         width: 2513,
         height: 3583,
       },
@@ -81,7 +80,7 @@ const Onboarding = ({navigation}) => {
       color: '#BEECC4',
       // picture: require('./assets/2.png'),
       picture: {
-        src: require('./assets/2.png'),
+        src: require('../assets/2.png'),
         width: 2791,
         height: 3744,
       },
@@ -94,7 +93,7 @@ const Onboarding = ({navigation}) => {
       color: '#FFE4D9',
       // picture: require('./assets/3.png'),
       picture: {
-        src: require('./assets/3.png'),
+        src: require('../assets/3.png'),
         width: 2738,
         height: 3244,
       },
@@ -107,7 +106,7 @@ const Onboarding = ({navigation}) => {
       color: '#FFDDDD',
       // picture: require('./assets/4.png'),
       picture: {
-        src: require('./assets/4.png'),
+        src: require('../assets/4.png'),
         width: 1757,
         height: 2551,
       },

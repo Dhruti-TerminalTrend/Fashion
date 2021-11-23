@@ -23,9 +23,14 @@ const styles = StyleSheet.create({
 const Button = ({label, variant, onPress}) => {
   const theme = useTheme();
   const backgroundColor =
-    variant === 'primary' ? theme.colors.primary : theme.colors.grey;
+    variant === 'primary'
+      ? theme.colors.primary
+      : variant === 'transparent'
+      ? 'transparent'
+      : theme.colors.grey;
 
-  const color = variant === 'primary' ? theme.colors.white : theme.colors.title;
+  const color =
+    variant === 'primary' ? theme.colors.white : theme.colors.button;
   return (
     <>
       <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>

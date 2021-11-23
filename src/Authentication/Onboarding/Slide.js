@@ -3,7 +3,6 @@ import {View, Dimensions, StyleSheet, Image} from 'react-native';
 import {Text} from '../../Components';
 
 const {width, height} = Dimensions.get('window');
-console.log(width, height);
 export const SLIDE_HEIGHT = height * 0.57;
 export const BORDER_RADIUS = 75;
 
