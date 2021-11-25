@@ -10,7 +10,7 @@ import {
   interpolateColor,
   useScrollHandler,
 } from 'react-native-redash/lib/module/v1';
-import {Welcome} from '..';
+import {Welcome} from '../Welcome';
 import {Theme} from '../../Components';
 import Dot from './Dot';
 import Slide, {SLIDE_HEIGHT} from './Slide';

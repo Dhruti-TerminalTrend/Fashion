@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({label, variant, onPress}) => {
+const Button = ({label, variant, onPress, children}) => {
   const theme = useTheme();
   const backgroundColor =
     variant === 'primary'
@@ -30,13 +30,17 @@ const Button = ({label, variant, onPress}) => {
       : theme.colors.grey;
 
   const color =
-    variant === 'primary' ? theme.colors.white : theme.colors.button;
+    variant === 'primary' ? theme.colors.white : theme.colors.secondary;
   return (
     <>
       <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>
-        <Text variant="button" style={{color}}>
-          {label}
-        </Text>
+        {children ? (
+          children
+        ) : (
+          <Text variant="button" style={{color}}>
+            {label}
+          </Text>
+        )}
       </RectButton>
     </>
   );

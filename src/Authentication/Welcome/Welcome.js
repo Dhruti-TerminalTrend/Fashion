@@ -2,6 +2,7 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet} from 'react-native';
 import {Button} from '../../Components';
 import Theme, {Box, Text} from '../../Components/Theme';
+import {Login} from '../Login';
 
 const {width} = Dimensions.get('window');
 
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Welcome = () => {
+const Welcome = ({navigation}) => {
   const picture = {
     src: require('../../Authentication/assets/5.png'),
   };
@@ -46,9 +47,17 @@ const Welcome = () => {
             <Text variant="body" textAlign="center">
               Login to your account below or signup for an amazing experience
             </Text>
-            <Button variant="primary" label="Have an account? Login" />
-            <Button label="Join us, it's Free" />
-            <Button variant="transparent" label="Forgot Password?" />
+            <Button
+              variant="primary"
+              label="Have an account? Login"
+              onPress={() => navigation.navigate(Login)}
+            />
+            <Button label="Join us, it's Free" onPress={() => {}} />
+            <Button
+              variant="transparent"
+              label="Forgot Password?"
+              onPress={() => {}}
+            />
           </Box>
         </Box>
       </Box>
